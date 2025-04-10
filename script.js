@@ -14,10 +14,10 @@ window.onload = () => {
 
 
         // --- GSAP Animations ---
-        // Ensure GSAP and ScrollTrigger are loaded (they should be if window.onload fired)
+        // Ensures GSAP and ScrollTrigger are loaded
         if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
             gsap.registerPlugin(ScrollTrigger);
-            console.log('GSAP ScrollTrigger registered'); // Debug log
+            console.log('GSAP ScrollTrigger registered');
 
             // Hero Animation
             gsap.from(".hero-element", {
@@ -25,11 +25,11 @@ window.onload = () => {
                 opacity: 0,
                 y: 30,
                 stagger: 0.2,
-                delay: 0.2, // Keep a small delay after load
+                delay: 0.2,
                 ease: "power2.out",
-                onComplete: startTypewriter // Use function reference
+                onComplete: startTypewriter
             });
-            console.log('Hero animation initiated'); // Debug log
+            console.log('Hero animation initiated');
 
             // Animate Blob Backgrounds
             gsap.to(".animate-blob", {
@@ -51,7 +51,6 @@ window.onload = () => {
             // Scroll-Triggered Animations for Sections
             gsap.utils.toArray('.section-reveal').forEach((element, index) => {
                 const delay = parseFloat(element.style.getPropertyValue('--animation-delay')) || 0;
-                // console.log(`Setting up ScrollTrigger for element ${index + 1} with delay ${delay}`); // Debug log
 
                 gsap.fromTo(element,
                     { opacity: 0, y: 50 },
@@ -72,7 +71,7 @@ window.onload = () => {
                     }
                 );
             });
-            console.log('ScrollTrigger animations initiated'); // Debug log
+            console.log('ScrollTrigger animations initiated');
 
         } else {
              console.error('GSAP or ScrollTrigger library not loaded.');
@@ -87,7 +86,6 @@ window.onload = () => {
 
         function typeChar() {
             if (!typewriterElement) {
-                // console.error('Typewriter element not found.'); // Already handled in startTypewriter
                 return;
             }
             if (charIndex < textToType.length) {
@@ -102,21 +100,17 @@ window.onload = () => {
                 console.error('Cannot start typewriter: element not found.');
                 return;
             }
-            // Check if hero animation actually made the container visible
             const typewriterContainer = typewriterElement.closest('.typewriter-container');
             if (typewriterContainer && parseFloat(getComputedStyle(typewriterContainer).opacity) > 0.5) {
-                console.log('Starting typewriter effect'); // Debug log
+                console.log('Starting typewriter effect');
                 typewriterElement.textContent = ''; // Clear previous content
                 charIndex = 0;
                 setTimeout(typeChar, 500); // Start typing after a short delay
             } else {
                 // If the container is still hidden (e.g., if hero animation failed), don't start typing
                 console.warn('Typewriter container not visible, typewriter will not start.');
-                // Optionally retry, but if GSAP failed, it might loop indefinitely
-                // setTimeout(startTypewriter, 200);
             }
         }
-         // Initial call to startTypewriter is done via GSAP onComplete
 
         // --- Smooth Scrolling for Nav Links & CTA ---
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
