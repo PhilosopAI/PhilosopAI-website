@@ -16,6 +16,13 @@ PhilosopAI is an open-source initiative to build a conversational AI that inspir
 
 ---
 
+## 🌐 Project Blueprint
+
+🚀 Project Blueprint: [https://philosopai.netlify.app](https://ravixalgorithm.notion.site/philosopai-blueprint)
+
+
+---
+
 ## 📌 About the Project
 
 PhilosopAI is being developed in two parallel phases:
