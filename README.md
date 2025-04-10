@@ -77,8 +77,8 @@ A fully interactive philosophical assistant built with:
 ├── index.html # Main landing page <br>
 ├── script.js # JavaScript script <br>
 ├── assets/ # animations, banners, logos <br>
-____├── animation/ # animations <br>
-----├── favicon/ # icons, manifest.js <br>
+&nbsp &nbsp├── animation/ # animations <br>
+&nbsp &nbsp├── favicon/ # icons, manifest.js <br>
 ├── LICENSE <br>
 ├── README.md <br>
 ├── .GitHub/ # issue and PR template<br>
