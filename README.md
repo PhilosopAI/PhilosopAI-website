@@ -74,7 +74,7 @@ A fully interactive philosophical assistant built with:
 
 ## 📂 Project Structure
 
-├── index.html # Main landing page
+├── index.html # Main landing page <br>
 ├── styles/ # Tailwind & custom styles 
 ├── js/ # Interaction scripts 
 ├── images/ # Screenshots, banners, logos 
