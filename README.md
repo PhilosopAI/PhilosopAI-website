@@ -78,7 +78,7 @@ A fully interactive philosophical assistant built with:
 ├── script.js # JavaScript script <br>
 ├── assets/ # animations, banners, logos <br>
 &nbsp; &nbsp;├── animation/ # animations <br>
-&nbsp; &nbsp;├── favicon/ # icons, manifest.js <br>
+&nbsp; &nbsp;└── favicon/ # icons, manifest.js <br>
 ├── LICENSE <br>
 ├── README.md <br>
 ├── .GitHub/ # issue and PR template<br>
