@@ -75,10 +75,13 @@ A fully interactive philosophical assistant built with:
 ## 📂 Project Structure
 
 ├── index.html # Main landing page <br>
-├── js/ # Interaction scripts <br>
+├── script.js # JavaScript script <br>
 ├── assets/ # animations, banners, logos <br>
+    ├── animation/ # animations <br
+    ├── favicon/ # icons, manifest.js <br
 ├── LICENSE <br>
 ├── README.md <br>
+├── .GitHub/ # issue and PR template<br>
 └── CONTRIBUTING.md
 
 
