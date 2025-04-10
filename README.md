@@ -1,3 +1,9 @@
+![Status](https://img.shields.io/badge/status-active-brightgreen)
+![License](https://img.shields.io/github/license/PhilosopAI/PhilosopAI-website)
+![Issues](https://img.shields.io/github/issues/PhilosopAI/PhilosopAI-website)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+![Stars](https://img.shields.io/github/stars/PhilosopAI/PhilosopAI-website?style=social)
+
 ![Screenshot 2025-04-10 174609](https://github.com/user-attachments/assets/deae712a-b061-40dc-bd6d-6adf9d719743)
 # 🧠 PhilosopAI
 
