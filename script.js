@@ -174,7 +174,6 @@ window.onload = () => {
     }
 }; // End of window.onload listener
 
-lucide.createIcons();
 gsap.registerPlugin(ScrollTrigger);
 
 gsap.utils.toArray(".section-reveal").forEach((el, i) => {
