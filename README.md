@@ -2,7 +2,16 @@
 ![License](https://img.shields.io/github/license/PhilosopAI/PhilosopAI-website)
 ![Issues](https://img.shields.io/github/issues/PhilosopAI/PhilosopAI-website)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+![Last Commit](https://img.shields.io/github/last-commit/PhilosopAI/PhilosopAI-website)
+![Docs](https://img.shields.io/badge/docs-up--to--date-brightgreen)
+![Open Source Love](https://img.shields.io/badge/Open%20Source-%E2%9D%A4-red)
+![Forks](https://img.shields.io/github/forks/PhilosopAI/PhilosopAI-website?style=social)
+
+
+
 ![Stars](https://img.shields.io/github/stars/PhilosopAI/PhilosopAI-website?style=social)
+![Contributors](https://img.shields.io/github/contributors/PhilosopAI/PhilosopAI-website)
+
 
 ![Screenshot 2025-04-10 174609](https://github.com/user-attachments/assets/deae712a-b061-40dc-bd6d-6adf9d719743)
 # 🧠 PhilosopAI
