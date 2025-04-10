@@ -1,9 +1,7 @@
-// --- Use window.onload to wait for all resources (including scripts like Lucide) ---
 window.onload = () => {
-    console.log('Window fully loaded (HTML, CSS, JS, Images)'); // Debug log
+    console.log('Window fully loaded (HTML, CSS, JS, Images)');
 
-    try { // Add a try...catch block for better error handling
-
+    try {
         // Set Current Year in Footer
         const currentYearElement = document.getElementById('current-year');
         if (currentYearElement) {
@@ -12,9 +10,7 @@ window.onload = () => {
             console.error('Element with ID "current-year" not found.');
         }
 
-
         // --- GSAP Animations ---
-        // Ensures GSAP and ScrollTrigger are loaded
         if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
             gsap.registerPlugin(ScrollTrigger);
             console.log('GSAP ScrollTrigger registered');
@@ -27,11 +23,11 @@ window.onload = () => {
                 stagger: 0.2,
                 delay: 0.2,
                 ease: "power2.out",
-                onComplete: startTypewriter
+                onComplete: startTypewriter // callback
             });
             console.log('Hero animation initiated');
 
-            // Animate Blob Backgrounds
+            // Blob Backgrounds
             gsap.to(".animate-blob", {
                 duration: 12,
                 x: () => gsap.utils.random(-30, 30, 5),
@@ -48,10 +44,9 @@ window.onload = () => {
                 }
             });
 
-            // Scroll-Triggered Animations for Sections
-            gsap.utils.toArray('.section-reveal').forEach((element, index) => {
+            // Scroll-triggered reveal
+            gsap.utils.toArray('.section-reveal').forEach((element) => {
                 const delay = parseFloat(element.style.getPropertyValue('--animation-delay')) || 0;
-
                 gsap.fromTo(element,
                     { opacity: 0, y: 50 },
                     {
@@ -65,54 +60,74 @@ window.onload = () => {
                             start: 'top 85%',
                             end: 'bottom 15%',
                             toggleActions: 'play none none none',
-                            // markers: true, // Uncomment for debugging
                             once: true
                         }
                     }
                 );
             });
             console.log('ScrollTrigger animations initiated');
-
         } else {
-             console.error('GSAP or ScrollTrigger library not loaded.');
-             // Handle the error - animations won't work
+            console.error('GSAP or ScrollTrigger library not loaded.');
         }
-
 
         // --- Typewriter Effect ---
         const typewriterElement = document.getElementById('typewriter');
-        const textToType = "It doesn’t just respond—it resonates.";
+        const singleTypewriterText = "It doesn’t just respond—it resonates.";
+        const rotatingTexts = [
+            "Therapy for the poetic mind.",
+            "A whisper in the noise.",
+            "Your inner voice, amplified."
+        ];
         let charIndex = 0;
+        let rotationIndex = 0;
 
         function typeChar() {
-            if (!typewriterElement) {
-                return;
-            }
-            if (charIndex < textToType.length) {
-                typewriterElement.textContent += textToType.charAt(charIndex);
+            if (!typewriterElement) return;
+            if (charIndex < singleTypewriterText.length) {
+                typewriterElement.textContent += singleTypewriterText.charAt(charIndex);
                 charIndex++;
                 setTimeout(typeChar, Math.random() * 100 + 50);
+            } else {
+                // Once done, start rotating loop after delay
+                setTimeout(startRotatingTypewriter, 2000);
             }
         }
 
         function startTypewriter() {
-            if (!typewriterElement) {
-                console.error('Cannot start typewriter: element not found.');
-                return;
-            }
-            const typewriterContainer = typewriterElement.closest('.typewriter-container');
-            if (typewriterContainer && parseFloat(getComputedStyle(typewriterContainer).opacity) > 0.5) {
-                console.log('Starting typewriter effect');
-                typewriterElement.textContent = ''; // Clear previous content
+            if (!typewriterElement) return console.error('Typewriter element not found.');
+            const container = typewriterElement.closest('.typewriter-container');
+            if (container && parseFloat(getComputedStyle(container).opacity) > 0.5) {
+                console.log('Starting initial typewriter effect');
+                typewriterElement.textContent = '';
                 charIndex = 0;
-                setTimeout(typeChar, 500); // Start typing after a short delay
+                setTimeout(typeChar, 500);
             } else {
-                // If the container is still hidden (e.g., if hero animation failed), don't start typing
-                console.warn('Typewriter container not visible, typewriter will not start.');
+                console.warn('Typewriter container not visible.');
             }
         }
 
-        // --- Smooth Scrolling for Nav Links & CTA ---
+        function startRotatingTypewriter() {
+            if (!typewriterElement) return;
+
+            let i = 0;
+            let j = 0;
+            function loop() {
+                typewriterElement.textContent = rotatingTexts[i].slice(0, j++);
+                if (j <= rotatingTexts[i].length) {
+                    setTimeout(loop, 70);
+                } else {
+                    setTimeout(() => {
+                        j = 0;
+                        i = (i + 1) % rotatingTexts.length;
+                        loop();
+                    }, 3000);
+                }
+            }
+
+            loop();
+        }
+
+        // --- Smooth Scrolling ---
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -128,82 +143,38 @@ window.onload = () => {
                         console.warn(`Smooth scroll target "${targetId}" not found.`);
                     }
                 } catch (error) {
-                     console.error(`Error finding smooth scroll target "${targetId}": ${error}`);
+                    console.error(`Error in smooth scroll: ${error}`);
                 }
             });
         });
 
-        // --- Waitlist Form Handling (Front-end only) ---
+        // --- Waitlist Form ---
         const waitlistForm = document.getElementById('waitlist-form');
         const formMessage = document.getElementById('form-message');
 
         if (waitlistForm && formMessage) {
-            waitlistForm.addEventListener('submit', function(e) {
+            waitlistForm.addEventListener('submit', function (e) {
                 e.preventDefault();
                 const emailInput = document.getElementById('email');
                 if (emailInput) {
+                    const email = emailInput.value;
                     formMessage.textContent = 'Thank you! You\'ve been added to the waitlist.';
-                    formMessage.classList.remove('text-red-400'); // Ensure no error class
+                    formMessage.classList.remove('text-red-400');
                     formMessage.classList.add('text-green-400');
-                    const emailValue = emailInput.value;
                     emailInput.value = '';
-
+                    console.log(`Waitlist submission (simulated): ${email}`);
                     setTimeout(() => {
                         formMessage.textContent = '';
                     }, 5000);
-
-                    console.log(`Waitlist submission (simulation): ${emailValue}`);
                 } else {
-                     console.error('Email input element not found in waitlist form.');
+                    console.error('Email input not found.');
                 }
             });
         } else {
-            console.warn('Waitlist form or message element not found.');
+            console.warn('Waitlist form or message element missing.');
         }
 
     } catch (error) {
-         console.error("An error occurred during script initialization:", error);
-         // Optionally display an error message to the user on the page
-         // document.body.innerHTML = '<p style="color: red; padding: 20px;">An error occurred loading the page content. Please try refreshing.</p>';
+        console.error("An error occurred during script initialization:", error);
     }
-}; // End of window.onload listener
-
-gsap.registerPlugin(ScrollTrigger);
-
-gsap.utils.toArray(".section-reveal").forEach((el, i) => {
-    gsap.fromTo(el, { opacity: 0, y: 30 }, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        delay: el.style.getPropertyValue('--animation-delay') || i * 0.1,
-        scrollTrigger: {
-            trigger: el,
-            start: "top 80%",
-            toggleActions: "play none none none"
-        }
-    });
-});
-
-const typewriterTexts = [
-    "Therapy for the poetic mind.",
-    "A whisper in the noise.",
-    "Your inner voice, amplified."
-];
-
-let index = 0, char = 0;
-const typeElement = document.getElementById("typewriter");
-
-function typeLoop() {
-    if (!typeElement) return;
-    typeElement.textContent = typewriterTexts[index].slice(0, char++);
-    if (char <= typewriterTexts[index].length) {
-        setTimeout(typeLoop, 70);
-    } else {
-        setTimeout(() => {
-            char = 0;
-            index = (index + 1) % typewriterTexts.length;
-            typeLoop();
-        }, 3000);
-    }
-}
-typeLoop();
+};
