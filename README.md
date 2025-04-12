@@ -6,6 +6,10 @@
 ![Docs](https://img.shields.io/badge/docs-up--to--date-brightgreen)
 ![Open Source Love](https://img.shields.io/badge/Open%20Source-%E2%9D%A4-red)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c9247719-9fa8-407e-85de-ffd7c6a15f34/deploy-status)](https://app.netlify.com/sites/philosopai/deploys)
+
+
+
+
 ![Forks](https://img.shields.io/github/forks/PhilosopAI/PhilosopAI-website?style=social)
 ![Stars](https://img.shields.io/github/stars/PhilosopAI/PhilosopAI-website?style=social)
 ![Contributors](https://img.shields.io/github/contributors/PhilosopAI/PhilosopAI-website)
