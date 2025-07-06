@@ -174,6 +174,134 @@ window.onload = () => {
             console.warn('Waitlist form or message element missing.');
         }
 
+        // --- Chat Interface ---
+        const chatInput = document.getElementById('chat-input');
+        const sendButton = document.getElementById('send-message');
+        const chatMessages = document.getElementById('chat-messages');
+        
+        if (chatInput && sendButton && chatMessages) {
+            // Philosophical responses for the prototype
+            const philosophicalResponses = [
+                "\"Tell me more about this feeling. What does it whisper to you in the quiet moments?\"",
+                "\"Perhaps the answer isn't in the having, but in the becoming. What are you becoming through this experience?\"",
+                "\"Every question carries its own light. What illuminates your path when you ask this?\"",
+                "\"In the space between thoughts, what do you find? Sometimes wisdom lives in the pause.\"",
+                "\"You speak of weight—but what if this burden is actually a gift wrapped in difficulty?\"",
+                "\"The heart knows truths the mind hasn't learned yet. What is your heart telling you?\"",
+                "\"Storms pass, but they also water the seeds we didn't know we planted. What might be growing?\"",
+                "\"You are both the question and the answer, the seeker and the sought. How does this sit with you?\"",
+                "\"In poetry, we find that the broken places often let the most light through. What light do you see?\"",
+                "\"Breathe. In this moment, you are exactly where you need to be. What does this moment teach you?\"",
+                "\"The universe is still writing your story. What chapter feels like it's beginning now?\"",
+                "\"Sometimes the path forward is found by honoring where we've been. What are you grateful for in this journey?\""
+            ];
+
+            let messageCount = 0;
+
+            function addMessage(text, isUser = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'flex items-start space-x-3';
+                
+                if (isUser) {
+                    messageDiv.className += ' flex-row-reverse space-x-reverse';
+                    messageDiv.innerHTML = `
+                        <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="ri-user-line text-white text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="bg-gradient-to-r from-purple-600/20 to-indigo-600/20 rounded-2xl rounded-tr-sm px-4 py-3 max-w-md ml-auto">
+                                <p class="text-gray-200" style="font-family: 'Montserrat';">${text}</p>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1 mr-2 text-right">You • just now</p>
+                        </div>
+                    `;
+                } else {
+                    messageDiv.innerHTML = `
+                        <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="ri-brain-line text-white text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="bg-gray-700/50 backdrop-blur-sm rounded-2xl rounded-tl-sm px-4 py-3 max-w-md">
+                                <p class="text-gray-200" style="font-family: 'Montserrat';">${text}</p>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1 ml-2">PhilosopAI • just now</p>
+                        </div>
+                    `;
+                }
+                
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function typeMessage(text, callback) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'flex items-start space-x-3';
+                messageDiv.innerHTML = `
+                    <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="ri-brain-line text-white text-sm"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="bg-gray-700/50 backdrop-blur-sm rounded-2xl rounded-tl-sm px-4 py-3 max-w-md">
+                            <p class="text-gray-200 typing-indicator" style="font-family: 'Montserrat';">
+                                <span class="typing-text"></span><span class="typing-cursor">|</span>
+                            </p>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1 ml-2">PhilosopAI • typing...</p>
+                    </div>
+                `;
+                
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                const typingText = messageDiv.querySelector('.typing-text');
+                const typingCursor = messageDiv.querySelector('.typing-cursor');
+                const timestamp = messageDiv.querySelector('.text-xs');
+                
+                let i = 0;
+                function type() {
+                    if (i < text.length) {
+                        typingText.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(type, Math.random() * 50 + 30);
+                    } else {
+                        typingCursor.remove();
+                        timestamp.textContent = 'PhilosopAI • just now';
+                        if (callback) callback();
+                    }
+                }
+                
+                setTimeout(type, 800);
+            }
+
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (!message) return;
+                
+                // Add user message
+                addMessage(message, true);
+                chatInput.value = '';
+                
+                // Show typing indicator and respond
+                setTimeout(() => {
+                    const response = philosophicalResponses[messageCount % philosophicalResponses.length];
+                    typeMessage(response);
+                    messageCount++;
+                }, 1000);
+            }
+
+            // Event listeners
+            sendButton.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            console.log('Chat interface initialized');
+        } else {
+            console.warn('Chat interface elements missing.');
+        }
+
     } catch (error) {
         console.error("An error occurred during script initialization:", error);
     }

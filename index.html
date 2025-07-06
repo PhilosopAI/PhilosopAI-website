@@ -118,6 +118,35 @@
              box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.5);
              border-color: #a78bfa;
         }
+
+        /* Chat typing cursor animation */
+        .typing-cursor {
+            animation: blink 0.7s infinite;
+            color: #a78bfa;
+        }
+
+        /* Smooth scroll behavior for chat */
+        #chat-messages {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar for chat */
+        #chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #chat-messages::-webkit-scrollbar-track {
+            background: rgba(55, 65, 81, 0.1);
+        }
+
+        #chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(167, 139, 250, 0.3);
+            border-radius: 3px;
+        }
+
+        #chat-messages::-webkit-scrollbar-thumb:hover {
+            background: rgba(167, 139, 250, 0.5);
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-200">
@@ -129,6 +158,7 @@
                 <a href="#why-philosopai" class="text-gray-300 hover:text-white transition-colors">Why</a>
                 <a href="#how-it-works" class="text-gray-300 hover:text-white transition-colors">How</a>
                 <a href="#examples" class="text-gray-300 hover:text-white transition-colors">Examples</a>
+                <a href="#prototype" class="text-gray-300 hover:text-white transition-colors">Try It</a>
                 <a href="#waitlist" class="text-gray-300 hover:text-white transition-colors">Waitlist</a>
             </nav>
         </div>
@@ -149,8 +179,8 @@
             <p class="text-lg md:text-xl text-indigo-300 mb-10 font-light hero-element typewriter-container" style="min-height: 3em;">
                 <span id="typewriter" class="typewriter-text"></span>
             </p>
-            <a href="#why-philosopai" class="cta-button inline-block bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium text-lg py-3 px-8 rounded-full shadow-lg hover:from-purple-700 hover:to-indigo-700 hero-element" style="font-family: 'Montserrat';">
-                Step into the garden <i class="ri-arrow-right-line inline-block ml-1 text-xl"></i>
+            <a href="#prototype" class="cta-button inline-block bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium text-lg py-3 px-8 rounded-full shadow-lg hover:from-purple-700 hover:to-indigo-700 hero-element" style="font-family: 'Montserrat';">
+                Try the prototype <i class="ri-arrow-right-line inline-block ml-1 text-xl"></i>
             </a>
         </div>
     </section>
@@ -283,6 +313,76 @@
                 </blockquote>
                 </div>
              <p class="mt-12 text-gray-400 section-reveal" style="--animation-delay: 0.2s; font-family: 'Montserrat';">More reflections and poetic whispers coming soon...</p>
+        </div>
+    </section>
+
+    <section id="prototype" class="py-20 md:py-32 px-4 bg-gray-900/30 backdrop-blur-sm">
+        <div class="container mx-auto max-w-4xl">
+            <h3 class="text-3xl md:text-4xl font-bold mb-6 text-center section-reveal">Try <span class="gradient-text">PhilosopAI</span></h3>
+            <p class="text-gray-400 mb-10 text-center section-reveal" style="font-family: 'Montserrat';">Experience the whisper of philosophical conversation. This is an early prototype—let the dialogue begin.</p>
+            
+            <!-- Chat Interface -->
+            <div class="max-w-3xl mx-auto bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700/50 overflow-hidden section-reveal">
+                <!-- Chat Header -->
+                <div class="bg-gradient-to-r from-purple-600/20 to-indigo-600/20 px-6 py-4 border-b border-gray-700/50">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-full flex items-center justify-center">
+                                <i class="ri-brain-line text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">PhilosopAI</h4>
+                                <p class="text-gray-400 text-xs">Where poetry meets presence</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span class="text-green-400 text-xs">Online</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Messages -->
+                <div id="chat-messages" class="h-96 overflow-y-auto p-6 space-y-4">
+                    <!-- Welcome Message -->
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="ri-brain-line text-white text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="bg-gray-700/50 backdrop-blur-sm rounded-2xl rounded-tl-sm px-4 py-3 max-w-md">
+                                <p class="text-gray-200" style="font-family: 'Montserrat';">
+                                    "Welcome, fellow traveler. I am here to listen, to question, and to walk with you through the gardens of thought. What weighs on your mind today?"
+                                </p>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1 ml-2">PhilosopAI • just now</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Input -->
+                <div class="p-6 border-t border-gray-700/50">
+                    <div class="flex space-x-3">
+                        <input 
+                            type="text" 
+                            id="chat-input" 
+                            placeholder="Share your thoughts..." 
+                            class="flex-1 bg-gray-700/50 border border-gray-600/50 rounded-full px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent"
+                            style="font-family: 'Montserrat';"
+                        >
+                        <button 
+                            id="send-message" 
+                            class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-3 rounded-full hover:from-purple-700 hover:to-indigo-700 transition-all duration-200 flex items-center space-x-2"
+                        >
+                            <i class="ri-send-plane-2-line"></i>
+                            <span class="hidden sm:inline">Send</span>
+                        </button>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2 text-center" style="font-family: 'Montserrat';">
+                        Press Enter to send • This is a prototype with simulated responses
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
